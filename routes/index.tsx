@@ -6,7 +6,6 @@ import { saveTodo, allTodo } from "../database/index.ts";
 export const handler: Handlers<[string, string][]> = {
   async GET(_, ctx) {
     const todo = await allTodo();
-    console.log(todo);
     return ctx.render(todo);
   },
   async POST(req) {
