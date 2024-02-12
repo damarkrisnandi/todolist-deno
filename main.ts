@@ -4,7 +4,6 @@
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
-/// <reference lib="deno.unstable-kv" />
 
 import "$std/dotenv/load.ts";
 
