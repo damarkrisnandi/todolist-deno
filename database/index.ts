@@ -1,25 +1,22 @@
 const kv = await Deno.openKv();
 
-export async function saveTodo(content: string): Promise<string> {
+export function saveTodo(content: string): Promise<string> {
   return saveKV("todo", content);
 }
 
-export async function getTodo(id: string): Promise<string | null> {
+export function getTodo(id: string): Promise<string | null> {
   return getKV("todo", id);
 }
 
-export async function allTodo(): Promise<[string, string][]> {
+export function allTodo(): Promise<[string, string][]> {
   return getAllKV("todo");
 }
 
-export async function deleteTodo(id: string): Promise<string> {
+export function deleteTodo(id: string): Promise<string> {
   return deleteKV("todo", id);
 }
 
-export async function editTodo(
-  id: string,
-  value: string,
-): Promise<string | null> {
+export function editTodo(id: string, value: string): Promise<string | null> {
   return editKV("todo", id, value);
 }
 
@@ -40,7 +37,7 @@ async function editKV(
   id: string,
   value: string,
 ): Promise<string | null> {
-  const content: string | null = await kv.get([prefix, id]);
+  const content: any = await kv.get([prefix, id]);
   if (!content) {
     return null;
   }
