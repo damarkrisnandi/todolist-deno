@@ -16,6 +16,13 @@ export async function deleteTodo(id: string): Promise<string> {
   return deleteKV("todo", id);
 }
 
+export async function editTodo(
+  id: string,
+  value: string,
+): Promise<string | null> {
+  return editKV("todo", id, value);
+}
+
 // main methods
 
 function generateId(): string {
@@ -24,6 +31,19 @@ function generateId(): string {
 
 async function saveKV(prefix: string, value: string): Promise<string> {
   const id = generateId();
+  await kv.set([prefix, id], value);
+  return id;
+}
+
+async function editKV(
+  prefix: string,
+  id: string,
+  value: string,
+): Promise<string | null> {
+  const content: string | null = await kv.get([prefix, id]);
+  if (!content) {
+    return null;
+  }
   await kv.set([prefix, id], value);
   return id;
 }
